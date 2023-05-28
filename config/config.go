@@ -5,11 +5,17 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"os"
 )
 
 func Connect() *sql.DB {
 	// access db pass from secret.json
-	file, err := ioutil.ReadFile("../secret.json")
+	currentDir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	file, err := ioutil.ReadFile(currentDir + "/secret.json")
 	if err != nil {
 		log.Fatal("Error reading configuration file:", err)
 	}
@@ -20,9 +26,9 @@ func Connect() *sql.DB {
 		log.Fatal("Error parsing configuration file:", err)
 	}
 
-	dbPass, ok := config["api_key"].(string)
+	dbPass, ok := config["db_password"].(string)
 	if !ok {
-		log.Fatal("API key not found or invalid type")
+		log.Fatal("DB password not found or invalid type")
 	}
 
 	dbDriver := "mysql"
