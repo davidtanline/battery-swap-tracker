@@ -15,7 +15,7 @@ func Connect() *sql.DB {
 		log.Fatal(err)
 	}
 
-	file, err := ioutil.ReadFile(currentDir + "/secret.json")
+	file, err := ioutil.ReadFile(currentDir + "/config.json")
 	if err != nil {
 		log.Fatal("Error reading configuration file:", err)
 	}
