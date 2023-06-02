@@ -13,7 +13,7 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/getBatteries", controller.AllBatteries).Methods("GET")
+	router.HandleFunc("/getBatteries", controller.GetAllBatteries).Methods("GET")
 	http.Handle("/", router)
 	fmt.Println("Connected to port 3001")
 	log.Fatal(http.ListenAndServe(":3001", router))
